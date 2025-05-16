@@ -2,6 +2,9 @@ project(chapter4)
 
 set(COMMON_SOURCE ../lib/get_num.c ../lib/error_functions.c)
 
-add_executable(bad_exclusive_open bad_exclusive_open.c ${COMMON_SOURCE})
+set(executes bad_exclusive_open t_readv mkstemp large_file large_file_offet_bits exercise_2 exercise_5 exercise_6)
 
-target_include_directories(bad_exclusive_open PRIVATE ../lib)
+foreach(execute ${executes})
+    add_executable(${execute} ${execute}.c ${COMMON_SOURCE})
+    target_include_directories(${execute} PRIVATE ../lib)
+endforeach()
