@@ -33,7 +33,9 @@ int main(int argc, char *argv[]) {
   printf("Allocating %d*%d bytes\n", numAllocs, blockSize);
 
   for (j = 0; j < numAllocs; j++) {
+    // malloc()不会在每次被调用时都调用 sbrk()来调整 program break 的位置，而是周期性地分配大块内存，并从中将小片内存返回给调用者。
     ptr[j] = malloc(blockSize);
+    printf("Malloc program break is now: %10p\n", sbrk(0));
     if (ptr[j] == NULL) {
       errExit("malloc");
     }
